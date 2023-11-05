@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+openai-whisper = "*"
+openai = "*"
+pydub = "*"
+python-dotenv = "*"
+python-telegram-bot = "*"
+requests = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
