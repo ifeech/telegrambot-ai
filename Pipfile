@@ -4,12 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-openai-whisper = "*"
-openai = "*"
-pydub = "*"
-python-dotenv = "*"
-python-telegram-bot = "*"
-requests = "*"
+openai-whisper = "==20231117"
+openai = "==1.9.*"
+pydub = "==0.25.*"
+python-dotenv = "==1.0.*"
+python-telegram-bot = "==20.7"
+requests = "==2.31.*"
 
 [dev-packages]
 
