@@ -94,6 +94,8 @@ if __name__ == "__main__":
 
     if args.client == "gpt4all":
         chat_client = Gpt4AllApiClient(args.uri, args.model)
+    elif args.client == "ollama":
+        chat_client = OllamaApiClient(args.uri, args.model)
     else:
         chat_client = OpenAiApiClient(args.uri, args.model)
 

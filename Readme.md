@@ -10,9 +10,21 @@ Run:
 
 https://github.com/openai/whisper
 
-Whisper is a general-purpose speech recognition model. 
+Whisper is a general-purpose speech recognition model.
 
 Wisper requires the command-line tool **ffmpeg** to be installed on your system, which is available from most package managers.
+
+## Ollama
+
+https://github.com/jmorganca/ollama
+
+1. Pull and run ollama/ollama docker image
+2. Download model (e.g. mistral)
+3. Run telegram chat
+
+```
+python3 main.py --client=ollama -u http://localhost:11434/api -m mistral
+```
 
 ## GPT4All
 
