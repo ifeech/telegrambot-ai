@@ -23,7 +23,7 @@ https://github.com/jmorganca/ollama
 3. Run telegram chat
 
 ```
-python3 main.py --client=ollama -u http://localhost:11434/api -m mistral
+python3 main.py -c ollama -u http://localhost:11434/api -m mistral
 ```
 
 ## GPT4All
@@ -40,7 +40,7 @@ https://github.com/nomic-ai/gpt4all
 4. Run telegram chat
 
 ```
-python3 main.py --client=gpt4all --uri=http://localhost:4891/v1 --model=nous-hermes-llama2-13b.Q4_0.gguf
+python3 main.py --client=gpt4all --url=http://localhost:4891/v1 --model=nous-hermes-llama2-13b.Q4_0.gguf
 ```
 
 > `--client=gpt4all` is specified to use the `Completion` method for Gpt4All. Cause `ChatCompletion` doesn't work for me. You can add some logic to the /gpt4all-api/gpt4all_api/app/api_v1/routes/chat.py in the GPT4All repo. Then run bot-ai without --client=gpt4all.

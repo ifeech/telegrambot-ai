@@ -4,13 +4,13 @@ from abc import ABC, abstractmethod
 
 
 class Client(ABC):
-    def __init__(self, server: str, model: str):
-        self.server = server
-        self.model = model
+    def __init__(self, url: str, model: str):
+        self._url = url
+        self._model = model
 
-    async def answer(self, message: str) -> str:
+    def answer(self, messages: list) -> str:
         try:
-            response = self._request(message)
+            response = self._request(messages)
             answer = self._getMessage(response)
         except Exception as e:
             logging.critical("Server unavailable: %s", e)
@@ -20,7 +20,7 @@ class Client(ABC):
         return answer
 
     @abstractmethod
-    def _request(self, message: str):
+    def _request(self, messages: list):
         pass
 
     @abstractmethod

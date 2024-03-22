@@ -10,9 +10,9 @@ class AudioToText:
     DIR_AUDIO = "./var/Audio/"
 
     def __init__(self, model: str):
-        self.whisperModel = whisper.load_model(model)
+        self.__whisperModel = whisper.load_model(model)
 
-    async def ogg2wav(self, path: Path) -> Optional[Path]:
+    def ogg2wav(self, path: Path) -> Optional[Path]:
         if path.suffix == ".oga":
             audio_path = str(path)
 
@@ -28,10 +28,10 @@ class AudioToText:
 
         return None
 
-    async def get_text_from_audio(self, path: Path) -> str:
+    def get_text_from_audio(self, path: Path) -> str:
         audio_path = str(path)
 
-        result = self.whisperModel.transcribe(audio_path)
+        result = self.__whisperModel.transcribe(audio_path)
 
         self.__remove_audio(audio_path)
 
