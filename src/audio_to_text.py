@@ -7,7 +7,7 @@ from pydub import AudioSegment
 
 
 class AudioToText:
-    DIR_AUDIO = "./var/Audio/"
+    __DIR_AUDIO = "./var/Audio/"
 
     def __init__(self, model: str):
         self.__whisperModel = whisper.load_model(model)
@@ -19,7 +19,7 @@ class AudioToText:
             audio = AudioSegment.from_file(audio_path)
 
             wav_name = path.name.replace(".oga", ".wav")
-            wav_path = self.DIR_AUDIO + wav_name
+            wav_path = self.__DIR_AUDIO + wav_name
             audio.export(wav_path, format="wav")
 
             self.__remove_audio(audio_path)

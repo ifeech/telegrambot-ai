@@ -8,9 +8,9 @@ class Client(ABC):
         self._url = url
         self._model = model
 
-    def answer(self, messages: list) -> str:
+    async def answer(self, messages: list) -> str:
         try:
-            response = self._request(messages)
+            response = await self._request(messages)
             answer = self._getMessage(response)
         except Exception as e:
             logging.critical("Server unavailable: %s", e)
@@ -20,7 +20,7 @@ class Client(ABC):
         return answer
 
     @abstractmethod
-    def _request(self, messages: list):
+    async def _request(self, messages: list):
         pass
 
     @abstractmethod

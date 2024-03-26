@@ -19,7 +19,9 @@ class ChatAI:
             )
             context.user_data["waiting_for_message"] = False
         elif update.message.text:
-            answer = self.__generate_answer(update.message.text, context.user_data)
+            answer = await self.__generate_answer(
+                update.message.text, context.user_data
+            )
             await update.message.reply_text(answer)
 
     async def __voice(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -37,7 +39,7 @@ class ChatAI:
                 if transcribed_voice:
                     await update.message.reply_text("your voice: " + transcribed_voice)
 
-                    answer = self.__generate_answer(
+                    answer = await self.__generate_answer(
                         transcribed_voice, context.user_data
                     )
                     await update.message.reply_text(answer)
@@ -46,13 +48,13 @@ class ChatAI:
             else:
                 await update.message.reply_text("audio not found")
 
-    def __generate_answer(self, message: str, user_data: dict):
+    async def __generate_answer(self, message: str, user_data: dict):
         if "chat_session" not in user_data:
             user_data["chat_session"] = []
 
         user_data["chat_session"].append({"role": "user", "content": message})
 
-        answer = self.__chat_client.answer(user_data["chat_session"])
+        answer = await self.__chat_client.answer(user_data["chat_session"])
         user_data["chat_session"].append({"role": "assistant", "content": answer})
 
         return answer

@@ -2,8 +2,8 @@ from .openai_client import OpenAiApiClient
 
 
 class Gpt4AllApiClient(OpenAiApiClient):
-    def _request(self, messages: list):
-        return self.openai.completions.create(
+    async def _request(self, messages: list):
+        return await self.openai.completions.create(
             model=self._model,
             prompt=messages[0],
             max_tokens=100,
