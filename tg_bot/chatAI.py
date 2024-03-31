@@ -5,12 +5,19 @@ from telegram.ext import filters, ContextTypes, MessageHandler
 
 from chat_clients.abstract_client import Client
 from src.audio_to_text import AudioToText
+from src.text_to_audio import TextToAudio
 
 
 class ChatAI:
-    def __init__(self, chat_client: Client, audio_to_text: AudioToText):
+    def __init__(
+        self,
+        chat_client: Client,
+        audio_to_text: AudioToText,
+        text_to_audio: TextToAudio | None,
+    ):
         self.__chat_client = chat_client
         self.__audio_to_text = audio_to_text
+        self.__text_to_audio = text_to_audio
 
     async def __text(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         if context.user_data.get("waiting_for_message"):
@@ -42,7 +49,15 @@ class ChatAI:
                     answer = await self.__generate_answer(
                         transcribed_voice, context.user_data
                     )
-                    await update.message.reply_text(answer)
+
+                    if self.__text_to_audio:
+                        answer_wav = self.__text_to_audio.generate(
+                            answer, update.effective_user.id
+                        )
+                        await update.message.reply_voice(answer_wav)
+                        self.__text_to_audio.remove(answer_wav)
+                    else:
+                        await update.message.reply_text(answer)
                 else:
                     await update.message.reply_text("audio not recognized")
             else:

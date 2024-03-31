@@ -14,6 +14,18 @@ Whisper is a general-purpose speech recognition model.
 
 Wisper requires the command-line tool **ffmpeg** to be installed on your system, which is available from most package managers.
 
+## TTS
+
+https://github.com/coqui-ai/TTS
+
+TTS is a super cool Text-to-Speech model that lets you clone voices in different languages by using just a quick 3-second audio clip.
+
+The bot responds with a voice to a voice message.
+
+env
+**TTS_SPEAKER** - available speaker or custome voice (.wav). If no value is set, voice response is disabled.
+**TTS_LANGUAGE** - answer text language
+
 ## Ollama
 
 https://github.com/jmorganca/ollama

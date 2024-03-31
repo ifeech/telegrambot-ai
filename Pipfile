@@ -10,6 +10,10 @@ pydub = "==0.25.*"
 python-dotenv = "==1.0.*"
 python-telegram-bot = "==20.7"
 requests = "==2.31.*"
+tts = "==0.22.*"
+torch = "*"
+torchvision = "*"
+torchaudio = "*"
 
 [dev-packages]
 

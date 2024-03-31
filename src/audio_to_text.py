@@ -10,7 +10,7 @@ class AudioToText:
     __DIR_AUDIO = "./var/Audio/"
 
     def __init__(self, model: str):
-        self.__whisperModel = whisper.load_model(model)
+        self.__whisperModel = whisper.load_model(model).to(os.getenv("WHISPER_DEVICE"))
 
     def ogg2wav(self, path: Path) -> Optional[Path]:
         if path.suffix == ".oga":

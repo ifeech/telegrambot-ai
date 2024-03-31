@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from chat_clients import *
 from tg_bot import TGBot
 from src.audio_to_text import AudioToText
+from src.text_to_audio import TextToAudio
 
 
 load_dotenv()
@@ -40,7 +41,11 @@ if __name__ == "__main__":
         chat_client = OpenAiApiClient(args.url, args.model)
 
     audio_to_text = AudioToText(os.getenv("WHISPER_MODEL"))
+    if TextToAudio.isActive():
+        text_to_audio = TextToAudio("tts_models/multilingual/multi-dataset/xtts_v2")
+    else:
+        text_to_audio = None
 
-    TG_Bot = TGBot(os.getenv("TG_TOKEN"), chat_client, audio_to_text)
+    TG_Bot = TGBot(os.getenv("TG_TOKEN"), chat_client, audio_to_text, text_to_audio)
 
     TG_Bot.run()
